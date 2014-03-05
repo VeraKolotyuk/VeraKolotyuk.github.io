@@ -1,0 +1,822 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Зачем нужны Javascript фрэймворки? - Вера Колотюк</title>
+  <meta name="author" content="Вера Колотюк">
+
+  
+  <meta name="description" content="Очень часто, начиная новый проект, фронтенд-разработчик сталкивается с непонимаем со стороны команды, зачем нужно тащить на клиент какой-то фрэймворк &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://VeraKolotyuk.github.io/blog/2014/03/04/03-04-2014">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Вера Колотюк" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+  
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:VeraKolotyuk.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+
+<ul class="main-navigation">
+  <li><a href="/blog">Blogs</a></li>
+  <li><a href="/archives">Archieves</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <!-- <header role="banner"><hgroup>
+  <h1><a href="/">Вера Колотюк</a></h1>
+  
+    <h2>Фронтенд, UI/UX, инфорграфика</h2>
+  
+</hgroup>
+
+
+</header> -->
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Зачем нужны Javascript фрэймворки?</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-04T14:56:13+07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Очень часто, начиная новый проект, фронтенд-разработчик сталкивается с непонимаем со стороны команды, зачем нужно тащить на клиент какой-то фрэймворк. Это всё круто, конечно, но зачем нам пробовать что-то новое, если у нас есть jQuery!?</p>
+
+
+
+
+<p>Да, у нас есть уйма js-фрэймворков и список на todomvc.com постоянно пополняется, да, для многих из них совершенно не обязательно городить полноценное MVC на клиенте, но почему-то для каждого нового проекта всегда милее взять хорошо знакомый jQuery и начинать по новой изобретать велосипед, чтобы хоть как-то не потонуть в нескончаемом потоке абсолютно неструктурированного js-кода.</p>
+
+
+<p>Да, это здорово, когда фронтенд-разработчик знает о существовании js-паттернов и умеет их применять, но возникает вопрос: &#8220;Зачем каждый раз писать одно и то же заново и с появлением каждого нового человека в команде объяснять в чём сакральный смысл созданной архитектуры?&#8221; Ведь можно просто выбрать что-то готовое и тратить время на решение бизнес-задач. Да, готовое решение подходит не всегда. Но чаще всего ваш случай не такой уж уникальный.</p>
+
+
+
+
+<p>Я взяла для примера задачу, которую часто приходится решать при написании стандартного веб-приложения: валидация формы на клиенте и отправка данных на сервер. Как-то так выглядел бы код на jQuery:</p>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">$</span><span class="p">(</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">formFieldWrapSelector</span> <span class="o">=</span> <span class="s1">&#39;.form-group&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">errorWrapSelector</span> <span class="o">=</span> <span class="s1">&#39;.help-block&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">hasErrorsClass</span> <span class="o">=</span> <span class="s1">&#39;has-error&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">moreInfoSelector</span> <span class="o">=</span> <span class="s1">&#39;.more-info&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">clearFormValidation</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$form</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">emailField</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputEmail1&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">passwordFiled</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputPassword1&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">emailField</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">hasErrorsClass</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">passwordFiled</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">removeClass</span><span class="p">(</span><span class="nx">hasErrorsClass</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">emailField</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">errorWrapSelector</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>      <span class="nx">passwordFiled</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">errorWrapSelector</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">validate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$form</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">emailField</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputEmail1&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">email</span> <span class="o">=</span> <span class="nx">emailField</span><span class="p">.</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>          <span class="nx">passwordFiled</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputPassword1&#39;</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">password</span> <span class="o">=</span> <span class="nx">passwordFiled</span><span class="p">.</span><span class="nx">val</span><span class="p">(),</span>
+</span><span class='line'>          <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="nx">clearFormValidation</span><span class="p">(</span><span class="nx">$form</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">email</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">emailField</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">errorWrapSelector</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">emailField</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">hasErrorsClass</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">password</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">passwordFiled</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">errorWrapSelector</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">passwordFiled</span><span class="p">.</span><span class="nx">parents</span><span class="p">(</span><span class="nx">formFieldWrapSelector</span><span class="p">).</span><span class="nx">addClass</span><span class="p">(</span><span class="nx">hasErrorsClass</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="cm">/* TODO:: add more fileds... */</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span> <span class="nx">isValid</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="s1">&#39;[name=&quot;profileForm&quot;]&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">evt</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>      <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">),</span>
+</span><span class='line'>          <span class="nx">isValid</span> <span class="o">=</span> <span class="nx">validate</span><span class="p">(</span><span class="nx">$target</span><span class="p">);</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Send data to server</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;.js-want-more&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">isHidden</span> <span class="o">=</span> <span class="o">!</span><span class="nx">$target</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;:checked&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">isHidden</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="nx">moreInfoSelector</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">$</span><span class="p">(</span><span class="nx">moreInfoSelector</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Какие сразу возникают проблемы?</p>
+
+<ul>
+<li><p>Если вы захотите, к примеру, порефакторить код (ведь это не последняя форма в вашем проекте) и вынести обработку сабмита в другой js-файл, а функция validate всё ещё уникальная для каждой формы, придётся создавать отдельный модуль для каждой формы, свою область видимости. Кто знает сколько таких функци validate у вас уже в проекте?</p></li>
+<li><p>Вам придётся придумавать свои правила написания нового кода: все селекторы определяются там-то, новый модуль должен выглядеть так-то, а все обработчики событий пишем здесь. Вам нужно будет всё это придумать, описать, понять что вы что-то забыли, описать ещё немного. И каждый раз новому члену команды нужно будет объяснять это и шанс, что он уже знаком с вашими привилами стремится к нулю.</p></li>
+<li><p>Чуть-чуть поменяем структуру html и нам сразу надо идти в наш js и искать все места, где чудесным образом всё вдруг перестало работать.</p></li>
+<li><p>Здесь мы прощаемся с той самой идеей разделения логики и внешнего представления, вы проверяете данные на валидность и тут же меняете DOM дерево. Single responsibility? Не, не слышали&hellip;</p></li>
+<li><p>Вам нужно самим следить какой js файл подключить в каком шаблоне, если же у вас в конечном итоге весь js собирается в один файл, то вы всегда должны контролировать, существуют ли в DOM дереве элементы, с которыми вы работаете. Очень много логики в голове. Чем больше разработчиков на проекте, тем более хрупким всё это выглядит.</p></li>
+<li><p>Каждый раз, когда пользователь что-то меняет на странице, вы должны обновить данные в js-коде, и, наооборот, если вы меняете данные, не забудьте обновить внешний вид. И снова слишком много логики в голове.</p></li>
+</ul>
+
+
+<h3>Twitter Flight</h3>
+
+
+
+
+<p>Twitter предлагает легковесный фрэймворк, который помогает структурировать код и избежать тех ошибок, которые часто допускают, при создании архитектуры в javascript. Он не диктует жёстких правил, вы можете использовать тот шаблонизатор, который любите, или не использовать его совсем. Вы можете посылать данные на сервер, так, как хотите и вам совсем не обязательно создавать большое количество структур, которые скорее всего в вашем приложении просто не нужны. Весь фрэймворк - это набор AMD модулей, выбирайте любой загрузчик и начинайте пользоваться.</p>
+
+
+<p>Ваше приложение будет представлять из себя набор компонентов, причём каждый компонент отвечает либо за представление, либо за логику. Для нашей формы мы можем создать два компонента для конкретной формы (внешний вид + логика) и два, которые будут содержать общие методы для всех подобных форм.</p>
+
+
+<p>Пример UI компонента:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">define</span><span class="p">(</span>
+</span><span class='line'>  <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;flight/lib/component&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;ajax_form_ui&#39;</span>
+</span><span class='line'>  <span class="p">],</span>
+</span><span class='line'>  <span class="kd">function</span><span class="p">(</span><span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">ajaxFormUIMixin</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">defineComponent</span><span class="p">(</span><span class="nx">profileFormUI</span><span class="p">,</span> <span class="nx">ajaxFormUIMixin</span><span class="p">);</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">profileFormUI</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">defaultAttrs</span><span class="p">({</span>
+</span><span class='line'>        <span class="s2">&quot;wantMoreSwitchSelector&quot;</span><span class="o">:</span> <span class="s1">&#39;.js-want-more&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s2">&quot;moreInfoSelector&quot;</span><span class="o">:</span> <span class="s1">&#39;.more-info&#39;</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">getFormValues</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">$form</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>        <span class="nx">values</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputEmail1&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>        <span class="nx">values</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nx">$form</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;#exampleInputPassword1&#39;</span><span class="p">).</span><span class="nx">val</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* TODO:: add more fileds... */</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">values</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">formSubmitSuccess</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Make some ui changes after successful submit</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">wantMoreClick</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">isHidden</span> <span class="o">=</span> <span class="o">!</span><span class="nx">$target</span><span class="p">.</span><span class="nx">is</span><span class="p">(</span><span class="s1">&#39;:checked&#39;</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="nx">isHidden</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;moreInfoSelector&#39;</span><span class="p">).</span><span class="nx">hide</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s1">&#39;moreInfoSelector&#39;</span><span class="p">).</span><span class="nx">show</span><span class="p">();</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">ajaxSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">evt</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">values</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">getFormValues</span><span class="p">(</span><span class="nx">$target</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;uiSubmit&#39;</span><span class="p">,</span> <span class="nx">values</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;initialize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">wantMoreSwitchSelector</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">wantMoreClick</span><span class="p">});</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;formSubmitSuccess&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">ajaxFormSelector</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">formSubmitSuccess</span><span class="p">});</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">ajaxFormSelector</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajaxSubmit</span><span class="p">});</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Все компоненты общаются с помощью событий, вы не можете вызвать код другого компонента снаружи. Поэтому наш Data компонент подписан на события UI:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="s1">&#39;use strict&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">define</span><span class="p">(</span>
+</span><span class='line'>  <span class="p">[</span>
+</span><span class='line'>    <span class="s1">&#39;flight/lib/component&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;ajax_form_data&#39;</span>
+</span><span class='line'>  <span class="p">],</span>
+</span><span class='line'>  <span class="kd">function</span><span class="p">(</span><span class="nx">defineComponent</span><span class="p">,</span> <span class="nx">ajaxFormDataMixin</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">defineComponent</span><span class="p">(</span><span class="nx">profileFormData</span><span class="p">,</span> <span class="nx">ajaxFormDataMixin</span><span class="p">);</span>
+</span><span class='line'>    <span class="kd">function</span> <span class="nx">profileFormData</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">defaultAttrs</span><span class="p">({</span>
+</span><span class='line'>        <span class="s2">&quot;defaultContext&quot;</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="s1">&#39;email&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;password&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;personal&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;profession&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'>          <span class="p">},</span>
+</span><span class='line'>          <span class="nx">values</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>            <span class="s1">&#39;email&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;password&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;personal&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+</span><span class='line'>            <span class="s1">&#39;profession&#39;</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>      <span class="p">})</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">validate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">formValues</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="kd">var</span> <span class="nx">errors</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">formValues</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">errors</span><span class="p">[</span><span class="s1">&#39;email&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">formValues</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">===</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">errors</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/* TODO:: add more fileds... */</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="nx">errors</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">ajaxSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">evt</span><span class="p">,</span> <span class="nx">values</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;submit&#39;</span><span class="p">);</span>
+</span><span class='line'>          <span class="nx">evt</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">$target</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="kd">var</span> <span class="nx">errors</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">values</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">$</span><span class="p">.</span><span class="nx">isEmptyObject</span><span class="p">(</span><span class="nx">errors</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;renderForm&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;errors&#39;</span><span class="o">:</span> <span class="nx">errors</span><span class="p">,</span> <span class="s1">&#39;values&#39;</span><span class="o">:</span> <span class="nx">values</span><span class="p">});</span>
+</span><span class='line'>          <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>              <span class="k">this</span><span class="p">.</span><span class="nx">submitForm</span><span class="p">(</span><span class="nx">$target</span><span class="p">);</span>
+</span><span class='line'>          <span class="p">}</span>
+</span><span class='line'>      <span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">after</span><span class="p">(</span><span class="s1">&#39;initialize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;renderForm&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">attr</span><span class="p">.</span><span class="nx">defaultContext</span><span class="p">);</span>
+</span><span class='line'>          <span class="k">this</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;uiSubmit&quot;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajaxSubmit</span><span class="p">);</span>
+</span><span class='line'>      <span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Общие методы и свойства вынесены в отдельные модули, которые во фрэймворке назывют миксинами. В данном случае создано два миксина, для логики и представления.
+Возможно после небольшого jQuery файла такой код покажется излишним, но как только приложение начнёт расти: появится больше одной формы, пользователи внезапно захотят не только создавать, но редактировать сущности, выгода окажется очевидной. Проблема в том, что когда нужно срочно добавить небольшую фичу, а вас уже тонны js-кода, куда проще впилить пару костылей, чем переписывать всё на новый фреймворк.</p>
+
+<h3>React.js</h3>
+
+
+<p>Facebook предлагает немного иной подход. В React.js ваш код  &ndash; опять же набор компонент, но тут придётся отказаться от привычного убеждения, что шаблоны  в javascript &ndash; это плохо. Разработчики фрэймворка считают, что компонент это единое целое и всё, что с ним связано &ndash; внешний вид, данные, все события &ndash; должно находиться в одном месте. Так будет проще вносить изменения. Для простототы написания можно использовать JSX &ndash; javascript, расширенный XML синтаксисом. В результате компонент выглядит довольно компактно:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="cm">/** @jsx React.DOM */</span>
+</span><span class='line'><span class="kd">var</span> <span class="nx">ProfileForm</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createClass</span><span class="p">({</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">errors</span><span class="o">:</span> <span class="p">{</span><span class="nx">email</span><span class="o">:</span> <span class="p">{},</span> <span class="nx">password</span><span class="o">:</span> <span class="p">{}},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">validate</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">getDOMNode</span><span class="p">().</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">(),</span>
+</span><span class='line'>        <span class="nx">password</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">refs</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">getDOMNode</span><span class="p">().</span><span class="nx">value</span><span class="p">.</span><span class="nx">trim</span><span class="p">(),</span>
+</span><span class='line'>        <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">this</span><span class="p">.</span><span class="nx">errors</span> <span class="o">=</span> <span class="p">{</span><span class="nx">email</span><span class="o">:</span> <span class="p">{},</span> <span class="nx">password</span><span class="o">:</span> <span class="p">{}};</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">email</span> <span class="o">===</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">hasError</span> <span class="o">=</span> <span class="s2">&quot;has-error&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nx">password</span> <span class="o">===</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s2">&quot;Can&#39;t be blank&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">hasError</span> <span class="o">=</span> <span class="s2">&quot;has-error&quot;</span><span class="p">;</span>
+</span><span class='line'>      <span class="nx">isValid</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="cm">/*  TODO:: add more fields ...  */</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nx">isValid</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nx">handleSubmit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">validate</span><span class="p">();</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="nx">errors</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">});</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>      <span class="c1">// Send data to server</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">getInitialState</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">{</span><span class="nx">data</span><span class="o">:</span> <span class="p">[]};</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">role</span><span class="o">=</span><span class="s2">&quot;form&quot;</span> <span class="nx">name</span><span class="o">=</span><span class="s2">&quot;profileForm&quot;</span> <span class="nx">data</span><span class="o">-</span><span class="nx">ajax</span><span class="o">=</span><span class="s2">&quot;formSubmitSuccess&quot;</span> <span class="nx">onSubmit</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">handleSubmit</span><span class="p">}</span><span class="o">&gt;</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-inner&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-group {this.errors.email.hasError}&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;exampleInputEmail1&quot;</span><span class="o">&gt;</span><span class="nx">Email</span> <span class="nx">address</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;email&quot;</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;exampleInputEmail1&quot;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Enter email&quot;</span> <span class="nx">ref</span><span class="o">=</span><span class="s2">&quot;email&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;help-block&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">email</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-group  {this.errors.password.hasError}&quot;</span> <span class="o">&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;exampleInputPassword1&quot;</span><span class="o">&gt;</span><span class="nx">Password</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;password&quot;</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;exampleInputPassword1&quot;</span> <span class="nx">placeholder</span><span class="o">=</span><span class="s2">&quot;Password&quot;</span> <span class="nx">ref</span><span class="o">=</span><span class="s2">&quot;password&quot;</span><span class="o">/&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;help-block&quot;</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">errors</span><span class="p">.</span><span class="nx">password</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-group&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;exampleInputFile&quot;</span><span class="o">&gt;</span><span class="nx">Personal</span> <span class="nx">Info</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">textarea</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span> <span class="nx">rows</span><span class="o">=</span><span class="s2">&quot;3&quot;</span><span class="o">&gt;&lt;</span><span class="err">/textarea&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;checkbox js-want-more&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;checkbox&quot;</span> <span class="nx">checked</span> <span class="o">/&gt;</span> <span class="nx">I</span> <span class="nx">want</span> <span class="nx">to</span> <span class="nx">tell</span> <span class="nx">more</span>
+</span><span class='line'>              <span class="o">&lt;</span><span class="err">/label&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-group more-info&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">label</span> <span class="k">for</span><span class="o">=</span><span class="s2">&quot;exampleInputFile&quot;</span><span class="o">&gt;</span><span class="nx">Profession</span><span class="o">&lt;</span><span class="err">/label&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="nx">select</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;form-control&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>                  <span class="o">&lt;</span><span class="nx">option</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">&lt;</span><span class="err">/option&gt;</span>
+</span><span class='line'>                  <span class="o">&lt;</span><span class="nx">option</span><span class="o">&gt;</span><span class="mi">2</span><span class="o">&lt;</span><span class="err">/option&gt;</span>
+</span><span class='line'>                  <span class="o">&lt;</span><span class="nx">option</span><span class="o">&gt;</span><span class="mi">3</span><span class="o">&lt;</span><span class="err">/option&gt;</span>
+</span><span class='line'>                  <span class="o">&lt;</span><span class="nx">option</span><span class="o">&gt;</span><span class="mi">4</span><span class="o">&lt;</span><span class="err">/option&gt;</span>
+</span><span class='line'>                  <span class="o">&lt;</span><span class="nx">option</span><span class="o">&gt;</span><span class="mi">5</span><span class="o">&lt;</span><span class="err">/option&gt;</span>
+</span><span class='line'>                <span class="o">&lt;</span><span class="err">/select&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>            <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;submit&quot;</span> <span class="nx">className</span><span class="o">=</span><span class="s2">&quot;btn btn-default&quot;</span><span class="o">&gt;</span><span class="nx">Submit</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+</span><span class='line'>          <span class="o">&lt;</span><span class="err">/div&gt;</span>
+</span><span class='line'>      <span class="o">&lt;</span><span class="err">/form&gt;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nx">React</span><span class="p">.</span><span class="nx">renderComponent</span><span class="p">(</span>
+</span><span class='line'>  <span class="o">&lt;</span><span class="nx">ProfileForm</span> <span class="nx">url</span><span class="o">=</span><span class="s2">&quot;/awesome&quot;</span><span class="o">/&gt;</span><span class="p">,</span>
+</span><span class='line'>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;form-wrap&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<p>Этот вариант гораздо более непривычен, придётся разобраться в JSX, но преимуществ тоже хватает, например, 2-way data binding и довольно высокая скорость рендеринга, по сравнению с тем же Angular.js. Кроме того, есть положительные отзывы от разработчиков реальных проектов, на которых фрйэмворк уже испытан. Например <a href="https://groups.google.com/forum/#!topic/reactjs/Kj6WATX0atg">здесь</a>.</p>
+
+
+
+
+<p>Это только два примера из большого количества вариантов. У каждого есть свои преимущества и недостатки, но я не вижу причин, чтобы не попробовать найти что-то подходящее для себя.</p>
+
+
+<p>Опять же, не стоит впадать в крайности, и я готова подписаться под каждым словом в <a href="https://medium.com/programming-ideas-tutorial-and-experience/f8bfc8012359">этой статье</a>. Что бы вы ни использовали при написании кода, всегда надо понимать, что ты делаешь.</p>
+
+
+<p>P.S. Исходный код примеров можно посмотреть <a href="https://github.com/VeraKolotyuk/tiny-front-example">тут</a></p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Вера Колотюк</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-04T14:56:13+07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://VeraKolotyuk.github.io/blog/2014/03/04/03-04-2014/" data-via="" data-counturl="http://VeraKolotyuk.github.io/blog/2014/03/04/03-04-2014/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/03/04/03-04-2014/">Зачем нужны Javascript фрэймворки?</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <!-- <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Вера Колотюк -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+
+
+</footer> -->
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
