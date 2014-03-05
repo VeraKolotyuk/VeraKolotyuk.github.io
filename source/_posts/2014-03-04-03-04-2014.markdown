@@ -1,0 +1,353 @@
+---
+layout: post
+title: Зачем нужны javascript фрэймворки?
+date: 2014-03-04 14:56:13 +0700
+comments: true
+categories:
+---
+
+
+<p>Очень часто, начиная новый проект, фронтенд-разработчик сталкивается с непонимаем со стороны команды, зачем нужно тащить на клиент какой-то фрэймворк. Это всё круто, конечно, но зачем нам пробовать что-то новое, если у нас есть jQuery!?</p>
+
+<p>Да, у нас есть уйма js-фрэймворков и список на todomvc.com постоянно пополняется, да, для многих из них совершенно не обязательно городить полноценное MVC на клиенте, но почему-то для каждого нового проекта всегда милее взять хорошо знакомый jQuery и начинать по новой изобретать велосипед, чтобы хоть как-то не потонуть в нескончаемом потоке абсолютно неструктурированного js-кода.</p>
+<p>Да, это здорово, когда фронтенд-разработчик знает о существовании js-паттернов и умеет их применять, но возникает вопрос: "Зачем каждый раз писать одно и то же заново и с появлением каждого нового человека в команде объяснять в чём сакральный смысл созданной архитектуры?" Ведь можно просто выбрать что-то готовое и тратить время на решение бизнес-задач. Да, готовое решение подходит не всегда. Но чаще всего ваш случай не такой уж уникальный.</p>
+
+<p>Я взяла для примера задачу, которую часто приходится решать при написании стандартного веб-приложения: валидация формы на клиенте и отправка данных на сервер. Как-то так выглядел бы код на jQuery:</p>
+
+
+
+``` javascript
+
+$( function() {
+
+    var formFieldWrapSelector = '.form-group',
+        errorWrapSelector = '.help-block',
+        hasErrorsClass = 'has-error',
+        moreInfoSelector = '.more-info';
+
+    var clearFormValidation = function($form) {
+      var emailField = $form.find('#exampleInputEmail1'),
+          passwordFiled = $form.find('#exampleInputPassword1');
+
+      emailField.parents(formFieldWrapSelector).removeClass(hasErrorsClass);
+      passwordFiled.parents(formFieldWrapSelector).removeClass(hasErrorsClass);
+      emailField.parents(formFieldWrapSelector).find(errorWrapSelector).html("");
+      passwordFiled.parents(formFieldWrapSelector).find(errorWrapSelector).html("");
+    };
+
+    var validate = function($form) {
+      var emailField = $form.find('#exampleInputEmail1'),
+          email = emailField.val(),
+          passwordFiled = $form.find('#exampleInputPassword1'),
+          password = passwordFiled.val(),
+          isValid = true;
+
+      clearFormValidation($form);
+      if (email === '') {
+        emailField.parents(formFieldWrapSelector).find(errorWrapSelector).html("Can't be blank");
+        emailField.parents(formFieldWrapSelector).addClass(hasErrorsClass);
+        isValid = false;
+      }
+      if (password === '') {
+        passwordFiled.parents(formFieldWrapSelector).find(errorWrapSelector).html("Can't be blank");
+        passwordFiled.parents(formFieldWrapSelector).addClass(hasErrorsClass);
+        isValid = false;
+      }
+
+      /* TODO:: add more fileds... */
+
+      return isValid;
+    };
+
+    $(document).on('submit', '[name="profileForm"]', function(evt) {
+      evt.preventDefault();
+      var $target = $(evt.target),
+          isValid = validate($target);
+      if (isValid) {
+        // Send data to server
+      }
+    });
+
+    $(document).on('click', '.js-want-more', function(evt) {
+        var $target = $(evt.target);
+        var isHidden = !$target.is(':checked');
+        if (isHidden) {
+          $(moreInfoSelector).hide();
+        } else {
+          $(moreInfoSelector).show();
+        }
+    });
+});
+
+```
+
+Какие сразу возникают проблемы?
+
+- Если вы захотите, к примеру, порефакторить код (ведь это не последняя форма в вашем проекте) и вынести обработку сабмита в другой js-файл, а функция validate всё ещё уникальная для каждой формы, придётся создавать отдельный модуль для каждой формы, свою область видимости. Кто знает сколько таких функци validate у вас уже в проекте?
+
+- Вам придётся придумавать свои правила написания нового кода: все селекторы определяются там-то, новый модуль должен выглядеть так-то, а все обработчики событий пишем здесь. Вам нужно будет всё это придумать, описать, понять что вы что-то забыли, описать ещё немного. И каждый раз новому члену команды нужно будет объяснять это и шанс, что он уже знаком с вашими привилами стремится к нулю.
+
+- Чуть-чуть поменяем структуру html и нам сразу надо идти в наш js и искать все места, где чудесным образом всё вдруг перестало работать.
+
+- Здесь мы прощаемся с той самой идеей разделения логики и внешнего представления, вы проверяете данные на валидность и тут же меняете DOM дерево. Single responsibility? Не, не слышали...
+
+- Вам нужно самим следить какой js файл подключить в каком шаблоне, если же у вас в конечном итоге весь js собирается в один файл, то вы всегда должны контролировать, существуют ли в DOM дереве элементы, с которыми вы работаете. Очень много логики в голове. Чем больше разработчиков на проекте, тем более хрупким всё это выглядит.
+
+- Каждый раз, когда пользователь что-то меняет на странице, вы должны обновить данные в js-коде, и, наооборот, если вы меняете данные, не забудьте обновить внешний вид. И снова слишком много логики в голове.
+
+
+<h3>Twitter Flight</h3>
+
+
+<p>Twitter предлагает легковесный фрэймворк, который помогает структурировать код и избежать тех ошибок, которые часто допускают, при создании архитектуры в javascript. Он не диктует жёстких правил, вы можете использовать тот шаблонизатор, который любите, или не использовать его совсем. Вы можете посылать данные на сервер, так, как хотите и вам совсем не обязательно создавать большое количество структур, которые скорее всего в вашем приложении просто не нужны. Весь фрэймворк - это набор AMD модулей, выбирайте любой загрузчик и начинайте пользоваться.</p>
+<p>Ваше приложение будет представлять из себя набор компонентов, причём каждый компонент отвечает либо за представление, либо за логику. Для нашей формы мы можем создать два компонента для конкретной формы (внешний вид + логика) и два, которые будут содержать общие методы для всех подобных форм.</p>
+
+
+
+Пример UI компонента:
+
+``` javascript
+
+define(
+  [
+    'flight/lib/component',
+    'ajax_form_ui'
+  ],
+  function(defineComponent, ajaxFormUIMixin) {
+
+    return defineComponent(profileFormUI, ajaxFormUIMixin);
+    function profileFormUI() {
+
+      this.defaultAttrs({
+        "wantMoreSwitchSelector": '.js-want-more',
+        "moreInfoSelector": '.more-info'
+      });
+
+
+      this.getFormValues = function($form) {
+        var values = {};
+        values['email'] = $form.find('#exampleInputEmail1').val();
+        values['password'] = $form.find('#exampleInputPassword1').val();
+
+        /* TODO:: add more fileds... */
+
+        return values;
+      };
+
+
+      this.formSubmitSuccess = function() {
+        // Make some ui changes after successful submit
+      };
+
+      this.wantMoreClick = function(evt) {
+          var $target = $(evt.target);
+          var isHidden = !$target.is(':checked');
+          if (isHidden) {
+            this.select('moreInfoSelector').hide();
+          } else {
+            this.select('moreInfoSelector').show();
+          }
+      };
+
+      this.ajaxSubmit = function(evt) {
+          console.log('submit');
+          evt.preventDefault();
+          var $target = $(evt.target);
+
+          var values = this.getFormValues($target);
+          this.trigger('uiSubmit', values);
+      };
+
+      this.after('initialize', function() {
+
+          this.on('click', {wantMoreSwitchSelector: this.wantMoreClick});
+          this.on('formSubmitSuccess', {ajaxFormSelector: this.formSubmitSuccess});
+          this.on('submit', {ajaxFormSelector: this.ajaxSubmit});
+      });
+    }
+  }
+);
+
+```
+
+Все компоненты общаются с помощью событий, вы не можете вызвать код другого компонента снаружи. Поэтому наш Data компонент подписан на события UI:
+
+``` javascript
+
+'use strict';
+
+define(
+  [
+    'flight/lib/component',
+    'ajax_form_data'
+  ],
+  function(defineComponent, ajaxFormDataMixin) {
+
+    return defineComponent(profileFormData, ajaxFormDataMixin);
+    function profileFormData() {
+
+
+      this.defaultAttrs({
+        "defaultContext": {
+          errors: {
+            'email': '',
+            'password': '',
+            'personal': '',
+            'profession': ''
+          },
+          values: {
+            'email': '',
+            'password': '',
+            'personal': '',
+            'profession': ''
+          }
+        }
+      })
+
+      this.validate = function(formValues) {
+        var errors = {};
+        if (formValues['email'] === '') {
+          errors['email'] = "Can't be blank";
+        }
+        if (formValues['password'] === '') {
+          errors['password'] = "Can't be blank";
+        }
+
+        /* TODO:: add more fileds... */
+
+        return errors;
+      };
+
+
+      this.ajaxSubmit = function(evt, values) {
+          console.log('submit');
+          evt.preventDefault();
+          var $target = $(evt.target);
+
+          var errors = this.validate(values);
+          if (!$.isEmptyObject(errors)) {
+            this.trigger('renderForm', {'errors': errors, 'values': values});
+          } else {
+              this.submitForm($target);
+          }
+      };
+
+      this.after('initialize', function() {
+          this.trigger('renderForm', this.attr.defaultContext);
+          this.on("uiSubmit", this.ajaxSubmit);
+      });
+    }
+  }
+);
+
+```
+
+Общие методы и свойства вынесены в отдельные модули, которые во фрэймворке назывют миксинами. В данном случае создано два миксина, для логики и представления.
+Возможно после небольшого jQuery файла такой код покажется излишним, но как только приложение начнёт расти: появится больше одной формы, пользователи внезапно захотят не только создавать, но редактировать сущности, выгода окажется очевидной. Проблема в том, что когда нужно срочно добавить небольшую фичу, а вас уже тонны js-кода, куда проще впилить пару костылей, чем переписывать всё на новый фреймворк.
+
+
+
+<h3>React.js</h3>
+
+Facebook предлагает немного иной подход. В React.js ваш код  - опять же набор компонент, но тут придётся отказаться от привычного убеждения, что шаблоны  в javascript - это плохо. Разработчики фрэймворка считают, что компонент это единое целое и всё, что с ним связано - внешний вид, данные, все события - должно находиться в одном месте. Так будет проще вносить изменения. Для простототы написания можно использовать JSX - javascript, расширенный XML синтаксисом. В результате компонент выглядит довольно компактно:
+
+``` javascript
+
+/** @jsx React.DOM */
+var ProfileForm = React.createClass({
+
+  errors: {email: {}, password: {}},
+
+  validate: function() {
+    var email = this.refs.email.getDOMNode().value.trim(),
+        password = this.refs.password.getDOMNode().value.trim(),
+        isValid = true;
+
+    this.errors = {email: {}, password: {}};
+    if (email === "") {
+      this.errors.email.text = "Can't be blank";
+      this.errors.email.hasError = "has-error";
+      isValid = false;
+    }
+
+    if (password === "") {
+      this.errors.password.text = "Can't be blank";
+      this.errors.password.hasError = "has-error";
+      isValid = false;
+    }
+
+    /*  TODO:: add more fields ...  */
+
+    return isValid;
+  },
+
+  handleSubmit: function() {
+
+    var isValid = this.validate();
+    if (!isValid) {
+      this.setState({errors: this.errors});
+    } else {
+      // Send data to server
+    }
+
+    return false;
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  render: function() {
+    return (
+      <form role="form" name="profileForm" data-ajax="formSubmitSuccess" onSubmit={this.handleSubmit}>
+          <div className="form-inner">
+            <div className="form-group {this.errors.email.hasError}">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" ref="email"/>
+              <div className="help-block">{this.errors.email.text}</div>
+            </div>
+            <div className="form-group  {this.errors.password.hasError}" >
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" ref="password"/>
+              <div className="help-block">{this.errors.password.text}</div>
+            </div>
+            <div className="form-group">
+              <label for="exampleInputFile">Personal Info</label>
+              <textarea className="form-control" rows="3"></textarea>
+            </div>
+            <div className="checkbox js-want-more">
+              <label>
+                <input type="checkbox" checked /> I want to tell more
+              </label>
+            </div>
+
+            <div className="form-group more-info">
+                <label for="exampleInputFile">Profession</label>
+                <select className="form-control">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+            </div>
+            <button type="submit" className="btn btn-default">Submit</button>
+          </div>
+      </form>
+    );
+  }
+});
+
+
+React.renderComponent(
+  <ProfileForm url="/awesome"/>,
+  document.getElementById('form-wrap')
+);
+
+```
+
+<p>Этот вариант гораздо более непривычен, придётся разобраться в JSX, но преимуществ тоже хватает, например, 2-way data binding и довольно высокая скорость рендеринга, по сравнению с тем же Angular.js. Кроме того, есть положительные отзывы от разработчиков реальных проектов, на которых фрйэмворк уже испытан. Например <a href="https://groups.google.com/forum/#!topic/reactjs/Kj6WATX0atg">здесь</a>.</p>
+
+
+<p>Это только два примера из большого количества вариантов. У каждого есть свои преимущества и недостатки, но я не вижу причин, чтобы не попробовать найти что-то подходящее для себя.</p>
+<p>Опять же, не стоит впадать в крайности, и я готова подписаться под каждым словом в <a href="https://medium.com/programming-ideas-tutorial-and-experience/f8bfc8012359">этой статье</a>. Что бы вы ни использовали при написании кода, всегда надо понимать, что ты делаешь.</p>
+
+P.S. Исходный код примеров можно посмотреть <a href="https://github.com/VeraKolotyuk/tiny-front-example">тут</a>

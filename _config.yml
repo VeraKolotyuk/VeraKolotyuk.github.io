@@ -2,10 +2,10 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
-title: My Octopress Blog
-subtitle: A blogging framework for hackers.
-author: Your Name
+url: http://VeraKolotyuk.github.io
+title: Вера Колотюк
+subtitle: Фронтенд, UI/UX, инфорграфика
+author: Вера Колотюк
 simple_search: http://google.com/search
 description:
 
