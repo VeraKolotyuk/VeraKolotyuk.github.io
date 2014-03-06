@@ -272,8 +272,6 @@ var ProfileForm = React.createClass({
       isValid = false;
     }
 
-    /*  TODO:: add more fields ...  */
-
     return isValid;
   },
 
