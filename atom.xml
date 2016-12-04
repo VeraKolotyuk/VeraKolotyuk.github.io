@@ -1,100 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Вера Колотюк</title>
-  <meta name="author" content="Вера Колотюк">
-
-  
-  <meta name="description" content="Так получилось, что за последние пару месяцев мне несколько раз приходилось принимать решение о том, какие фронтенд-инструменты будут использоваться &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><![CDATA[Вера Колотюк]]></title>
+  <link href="http://VeraKolotyuk.github.io/atom.xml" rel="self"/>
+  <link href="http://VeraKolotyuk.github.io/"/>
+  <updated>2016-12-04T23:59:10+06:00</updated>
+  <id>http://VeraKolotyuk.github.io/</id>
+  <author>
+    <name><![CDATA[Вера Колотюк]]></name>
+    <email><![CDATA[vmorozova77@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-  <link rel="canonical" href="http://VeraKolotyuk.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Вера Колотюк" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
-
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-</hgroup>
-
-</header>
-  <!-- <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:VeraKolotyuk.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav> -->
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/06/frontend-tools/">Про выбор инструментов для фронтенд-разработки</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-06T19:13:07+07:00" pubdate data-updated="true">Apr 6<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/04/06/frontend-tools/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Так получилось, что за последние пару месяцев мне несколько раз приходилось принимать решение о том, какие фронтенд-инструменты будут использоваться на старте новых проектов. При том, что опыта у меня не так много, было очень интересно послушать мнение людей, более искушённых в этих вопросах. Расстановка сил на тех проектах, где я работаю обычно такая: один фронтенд-разработчик (собственно это я) и три-четыре бэкэндера. Соответственно участие команды в вопросах выбора фрэймворков сводилось обычно к минимуму и просьбе сделать так, чтобы им приходилось как можно реже писать (о Боже!) javascript.</p>
+  <entry>
+    <title type="html"><![CDATA[Про выбор инструментов для фронтенд-разработки]]></title>
+    <link href="http://VeraKolotyuk.github.io/blog/2014/04/06/frontend-tools/"/>
+    <updated>2014-04-06T19:13:07+07:00</updated>
+    <id>http://VeraKolotyuk.github.io/blog/2014/04/06/frontend-tools</id>
+    <content type="html"><![CDATA[<p>Так получилось, что за последние пару месяцев мне несколько раз приходилось принимать решение о том, какие фронтенд-инструменты будут использоваться на старте новых проектов. При том, что опыта у меня не так много, было очень интересно послушать мнение людей, более искушённых в этих вопросах. Расстановка сил на тех проектах, где я работаю обычно такая: один фронтенд-разработчик (собственно это я) и три-четыре бэкэндера. Соответственно участие команды в вопросах выбора фрэймворков сводилось обычно к минимуму и просьбе сделать так, чтобы им приходилось как можно реже писать (о Боже!) javascript.</p>
 
 <p>Пришлось искать помощи на стороне.  Послушав мнения разных людей с разным опытом веб-разработки, у меня в голове появилось несколько мыслей касательно того, что же влияет на формирование набора инструментов, которые в дальнейшем используются на проекте.</p>
 
@@ -118,44 +42,15 @@
 <p>И наоборот, когда у вас целая команда разработчиков, понимающих, как должна быть написана фронтенд-часть современного веб приложения, а главное, имеющих желание её писать, то вам будут не страшны эксперименты с разными инструментами (своими или готовыми). Есть примеры продуктовых команд, которые попробовава какой-то фреймворк в конечном итоге отказывались от него и переписывали код на что-то другое. На мой взгяд, это вполне нормальная, рабочая ситуация. В конечном итоге на начальном этапе жизни какого-то продукта вам важнее быстро выпустить первую версию, получить фидбэк, скорректировать направление развития, и велик шанс, что те инструменты, которые казались подходящими в начале, станут вам совсем не нужны.</p>
 
 <p>Да, возможно, для какого-то сферического проекта в вакууме можно определить идеально подходящий набор инструментов, исходя из целей и задач, и здесь вам бы здорово помогли советы тех фронтенд-разработчиков, которые их уже решали, но от реальности не убежишь: у вас всегда будет команда, с определёнными скилами и возможностями и чаще всего есть заказчик, у которого может быть свой, сугубо индивидуальный (иногда весьма странный) взгляд на вещи. И выбор того, что использовать в разработке всегда будет определяться именно этим.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/20/different/">Всякие полезные штуки</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-20T15:33:34+07:00" pubdate data-updated="true">Mar 20<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/20/different/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>Javascript</h2>
+  <entry>
+    <title type="html"><![CDATA[Всякие полезные штуки]]></title>
+    <link href="http://VeraKolotyuk.github.io/blog/2014/03/20/different/"/>
+    <updated>2014-03-20T15:33:34+07:00</updated>
+    <id>http://VeraKolotyuk.github.io/blog/2014/03/20/different</id>
+    <content type="html"><![CDATA[<h2>Javascript</h2>
 
 
 <ul>
@@ -227,44 +122,15 @@
 
 
 <p><a href="https://github.com/dypsilon/frontend-dev-bookmarks">Ещё больше всяких полезностей!</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/04/about-js-frameworks/">Зачем нужны Javascript фрэймворки?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-03-04T14:56:13+07:00" pubdate data-updated="true">Mar 4<span>th</span>, 2014</time>
-        
-         | <a href="/blog/2014/03/04/about-js-frameworks/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Иногда, начиная новый проект, фронтенд-разработчик сталкивается с непонимаем со стороны команды, зачем нужно тащить на клиент какой-то фрэймворк. Это всё круто, конечно, но зачем нам пробовать что-то новое, если у нас есть jQuery!?</p>
+  <entry>
+    <title type="html"><![CDATA[Зачем нужны javascript фрэймворки?]]></title>
+    <link href="http://VeraKolotyuk.github.io/blog/2014/03/04/about-js-frameworks/"/>
+    <updated>2014-03-04T14:56:13+07:00</updated>
+    <id>http://VeraKolotyuk.github.io/blog/2014/03/04/about-js-frameworks</id>
+    <content type="html"><![CDATA[<p>Иногда, начиная новый проект, фронтенд-разработчик сталкивается с непонимаем со стороны команды, зачем нужно тащить на клиент какой-то фрэймворк. Это всё круто, конечно, но зачем нам пробовать что-то новое, если у нас есть jQuery!?</p>
 
 
 
@@ -884,104 +750,7 @@
 
 
 <p>P.S. Исходный код примеров можно посмотреть <a href="https://github.com/VeraKolotyuk/tiny-front-example">тут</a></p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <ul id="recent_posts">
-      <li class="post">
-      <a href="http://VeraKolotyuk.github.io" alt="Home"><img src="/images/Home.png"></a>
-      <a href="http://VeraKolotyuk.github.io/archives/" alt="Archives"><img src="/images/Calendar.png"></a>
-      <a href="mailto:vmorozova77@gmail.com" alt="E-Mail"><img src="/images/Envelope.png"></a>
-      <a href="http://VeraKolotyuk.github.io/atom.xml" alt="subscribe feed"><img src="/images/rss_big.png"></a>
-      </li>
-  </ul>
-</section>
-<section>
-  <h1>Блог</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/04/06/frontend-tools/">Про выбор инструментов для фронтенд-разработки</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/20/different/">Всякие полезные штуки</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/03/04/about-js-frameworks/">Зачем нужны Javascript фрэймворки?</a>
-      </li>
-    
-  </ul>
-</section>
-<section>
-  <h1>О себе</h1>
-  <p>
-   Меня зовут Вера Колотюк. Я занимаюсь фронтенд разработкой и UI/UX дизайном. Интересуюсь всем, что позволяет сделать конечный продукт удобным и желанным для пользователя. 
-  </p>
-</section>
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2016 - Вера Колотюк -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'vera-kolotyuk';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>
