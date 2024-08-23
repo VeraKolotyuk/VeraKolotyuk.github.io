@@ -47,6 +47,8 @@ a.button {
 h3 {
   font-size: 36px;
   font-family: 'Raleway', sans-serif;
+  margin-top: 55px;
+  margin-bottom: 15px;
 }
 h4 {
   font-size: 20px;
@@ -122,15 +124,7 @@ h4 {
   margin: 0 auto;
   padding-left: 10px;
   padding-right: 10px;
-  &.with-purple-bg {
-    background: var(--secondary-light-color);
-    color: white;
-    padding: 20px 50px;
-    border-radius: 20px;
-  }
-
-  &.with-blue-bg {
-    background: var(--primary-light-color);
+  &.with-bg {
     color: white;
     padding: 20px 50px;
     border-radius: 20px;
@@ -140,6 +134,14 @@ h4 {
         color: white;
       } 
     }
+  }
+
+  &.with-purple-bg {
+    background: var(--secondary-light-color);
+  }
+
+  &.with-blue-bg {
+    background: var(--primary-light-color);
   }
 }
 
@@ -269,6 +271,45 @@ h4 {
     width: 28px;
   }
 
+  .subsection-images {
+    #sm-lockboxes {
+      position: relative;
+      left: 0;
+      top: 0;
+    }
+    #sm-storybook {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+
+  .subsection {
+    flex-flow: column;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    margin-top: 30px;
+    font-size: 24px;
+  }
+
+  h4 {
+    font-size: 18px;
+    margin-top: 18px;
+  }
+
+  .project.with-bg {
+    padding: 10px;
+    h3 {
+      margin-top: 10px;
+    }
+  }
+
+  .articles {
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+
   #main-info {
     padding-bottom: 35px;
     .content {
@@ -280,6 +321,8 @@ h4 {
       .name {
         font-size: 60px;
         margin-top: 35px;
+        padding-left: 10px;
+        padding-right: 10px;
       }
   
       p {
