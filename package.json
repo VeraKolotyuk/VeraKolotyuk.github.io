@@ -7,6 +7,10 @@
     "prettify": "prettier --write 'src/**/*.js'",
     "deploy": "gh-pages -d dist"
   },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:VeraKolotyuk/VeraKolotyuk.github.io.git"
+  },
   "devDependencies": {
     "@babel/core": "^7.20.7",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
