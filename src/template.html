@@ -10,7 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+
     <title>Vera Kolotiuk</title>
   </head>
 
@@ -24,71 +25,85 @@
         </ul>
         <div class="content">
           <div class="name">Vera Kolotiuk</div>
-          
+
           <p>Frontend developer and UX designer <span class="text-highlighter">since 2010</span>, use my skills to enhance user experiences and make life a little easier for users</p>
           <ul>
             <li>
-              Bachelor degree in Mathematics and 
-              Computer Science 
+              Bachelor degree in Mathematics and
+              Computer Science
             </li>
             <li>Work remotely, live in Madrid</li>
-            <li>More than 10 years experience</li>
+            <li>More than 10 years of experience contributing to SaaS products</li>
           </ul>
         </div>
       </section>
 
       <section class="project">
         <h3>ShowMojo</h3>
-        <p>UX designer and frontend developer for platform that automates residential leasing process</p>
+        <p>UX designer and frontend developer for SaaS platform, that automates residential leasing process.</p>
         <ul class="tags">
           <li>Javascript</li>
-          <li>SCSS</li> 
-          <li>Webpack</li>
-          <li>Lookbook</li> 
+          <li>SCSS</li>
+          <li>Lookbook</li>
+          <li>Prototyping</li>
+          <li>UI/UX Design</li>
           <li>Figma</li>
         </ul>
 
-        <div class="subsection">
+        <div class="subsection sm-first-subsection">
           <div>
-            <h4>Improve Inconsistent Layout: Colors, Margins, Fonts</h4>
+            <h4>Device Storefront Refresh for Better Sales</h4>
             <p>
-              The previous design suffered from inconsistencies in layout elements such as color schemes, margin spacing, and different fonts usage.
-              All existing pages were analyzed and updated. Created full documentation for UI components using <a href="https://lookbook.build/" target="_blank">Lookbook.</a>
+              Marketing introduced new pricing plans and promotions for smart devices that our our company sell.
+              I worked cross-functionally with marketing to redesign the device storefront, making offers and value clearer, highlighting new plans and pricing logic visually.
+              New <span class="text-highlighter">UI supported marketing goals</span> and helped convert more users.
             </p>
-            <a href="https://medium.com/@vera_kolotyuk/useful-javascript-libraries-for-your-ui-previewing-with-lookbook-in-rails-projects-656bdc479123" target="_blank">more details</a>
 
-            <h4>Update Outdated Codebase</h4>
+            <h4>Dashboard Redesign to Surface Priorities</h4>
             <p>
-              The codebase included a significant amount of outdated code, specifically relying on an old version of jQuery. 
-              All libraries were replaced with more modern without jQuery. Outdated code was replaced with components 
-              incapsulating all styles and logic isolated from each other. <span class="text-highlighter">More than 20</span> new components were created and 15 libraries were replaced to the more modern ones.
+              The existing interface made it hard for users to understand what needed their attention. I led the design of a new dashboard that highlighted critical issues and next steps.
+              I analyzed real user behavior and product metrics for current UI, ran several design iterations based on feedback, and created an <span class="text-highlighter">action-oriented interface</span> that helped customers act faster and with more confidence.
             </p>
-            <a href="https://medium.com/@vera_kolotyuk/dispatch-custom-events-for-javascript-components-communication-4888ae896abf" target="_blank">more details</a>
-
-            <h4>Increase Asset Loading Speed</h4>
-            <p>Javascript structure and web performance were optimized using webpack-bundle-analyzer. Images were changed to more lightweight, webp format was used. As a result <span class="text-highlighter">24% loading speed increase</span> for the one of the most popular page.</p>
-            <a href="https://medium.com/@vera_kolotyuk/how-we-optimised-our-multi-page-javascript-structure-using-webpack-bundle-analyzer-366d7de6cc36" target="_blank">more details</a>
           </div>
           <div class="subsection-images right">
-            <img src="<%=require('images/showmojo/storybook.png')%>" alt="storybook" width="500" id="sm-storybook" />
-            <img src="<%=require('images/showmojo/lockboxes.jpg')%>" alt="png" width="450" id="sm-lockboxes" />
+            <div><img src="<%=require('images/showmojo/dashboard.png')%>" alt="dashboard" width="500" id="sm-dashboard" /></div>
+            <div><img src="<%=require('images/showmojo/salesfront.png')%>" alt="dashboard" width="320" id="sm-salesfront" /></div>
           </div>
+        </div>
+        <div class="three-quater-column">
+          <h4>Onboarding UX Optimization</h4>
+          <p>
+            The onboarding experience was too long and confusing. I reviewed the flow using product analytics and database insights,
+            removed rarely-used settings and redesigned the UI to reduce friction and cognitive load. As a result we have a <span class="text-highlighter">faster, simpler onboarding flow</span> that still retained essential functionality.
+          </p>
+        </div>
+
+        <div class="subsection-images sm-images js-animation js-animation-fade scroll-animation">
+          <div><img src="<%=require('images/showmojo/onboarding_import.png')%>" alt="import" height="500" id="" /></div>
+          <div><img src="<%=require('images/showmojo/onboarding_phone.png')%>" alt="import" height="500" id="" /></div>
+          <div><img src="<%=require('images/showmojo/onboarding.png')%>" alt="import" height="500" /></div>
         </div>
 
         <div class="subsection">
           <div class="subsection-images two-colomun">
             <div>
-              <h4>More Convenient Interface for Displaying Content</h4>
-              <p>Made it easier for users to navigate, find, and interact with the showings content. Improved design should focus on simplicity and clarity to ensure a better user experience.</p>
-              <img src="<%=require('images/showmojo/calendar.png')%>" alt="calendar" id="sm-calendar" class="js-animation-slide js-animation"/>
+              <h4>From Outdated to Modern: UI, Codebase & Performance</h4>
+              <p>
+                I worked on a legacy web application with outdated UI and codebase, redesigned inconsistent layout elements (colors, margins, fonts),
+                replaced deprecated libraries and jQuery-based code with modern architecture, and created <span class="text-highlighter">over 20 reusable UI components</span>, documented in Lookbook.
+              </p>
+              <div class="tools-wrap"><a href="https://medium.com/@vera_kolotyuk/dispatch-custom-events-for-javascript-components-communication-4888ae896abf" target="_blank">more details</a></div>
+
+              <img src="<%=require('images/showmojo/listings.png')%>" alt="calendar" id="sm-calendar" class="js-animation-slide js-animation"/>
             </div>
-            
+
             <div>
-              <h4>Implement of new design version for listings gallery</h4>
-              <p>Added asynchronous infinite loading for listings, combined with dynamic searching and filtering capabilities on a map interface.</p>
+              <h4>Increase Asset Loading Speed</h4>
+              <p>Javascript structure and web performance were optimized using webpack-bundle-analyzer. Images were changed to more lightweight, webp format was used. As a result <span class="text-highlighter">24% loading speed increase</span> for the one of the most popular page.</p>
+              <div class="tools-wrap"><a href="https://medium.com/@vera_kolotyuk/how-we-optimised-our-multi-page-javascript-structure-using-webpack-bundle-analyzer-366d7de6cc36" target="_blank">more details</a></div>
               <img src="<%=require('images/showmojo/gallery.png')%>" alt="" id="sm-gallery" class="js-animation-slide js-animation"/>
             </div>
-            
+
           </div>
         </div>
       </section>
@@ -102,9 +117,11 @@
         <ul class="tags">
           <li>Javascript</li>
           <li>D3.js</li>
-          <li>SCSS</li> 
+          <li>SCSS</li>
           <li>Webpack</li>
-          <li>ReactJS</li> 
+          <li>ReactJS</li>
+          <li>Prototyping</li>
+          <li>UI/UX Design</li>
           <li>Figma</li>
         </ul>
         <div class="subsection">
@@ -128,7 +145,7 @@
         <p>Frontend developer in online fashion edition</p>
         <ul class="tags">
           <li>Javascript</li>
-          <li>SCSS</li> 
+          <li>SCSS</li>
           <li>Css animation</li>
           <li>Parallax</li>
         </ul>
@@ -142,7 +159,7 @@
             <div><img src="<%=require('images/bookmagazine/1.jpg')%>" alt="" class="glow with-animation" /></div>
             <div><img src="<%=require('images/bookmagazine/2.jpg')%>" alt="" class="glow delay-1 with-animation" /></div>
           </div>
-          
+
         </div>
         <div class="subsection">
           <div class="subsection-images two-colomun">
@@ -151,19 +168,19 @@
           </div>
         </div>
       </section>
-   
+
 
       <section class="project">
         <h3>Bills payment service <a href="https://vp.ru/">vp.ru</a></h3>
         <p>Frontend developing and SEO optimisation</p>
         <ul class="tags">
           <li>Javascript</li>
-          <li>SCSS</li> 
+          <li>SCSS</li>
           <li>ReactJs</li>
           <li>Redux</li>
           <li>NextJs</li>
-        </ul>   
-        
+        </ul>
+
         <h4>Optimize SPA for SEO</h4>
         <p>Application was created using ReactJs/Redux and <span class="text-highlighter">NextJs frameworks.</span></p>
         <div class="subsection">
@@ -178,19 +195,19 @@
         <p>Frontend developer for streaming service</p>
         <ul class="tags">
           <li>Javascript</li>
-          <li>SCSS</li> 
+          <li>SCSS</li>
           <li>ReactJs</li>
           <li>Redux</li>
           <li>wavesurfer.js</li>
-        </ul>    
+        </ul>
 
         <div class="subsection with-grayscale-animation">
           <div class="subsection-images two-colomun">
             <div class="">
               <h4>Develop an Audio Player Component with Visualization</h4>
               <p>
-                Created a standalone, reusable audio player component within the project, 
-                including real-time audio visualization feature using <span class="text-highlighter">wavesurfer.js library.</span> 
+                Created a standalone, reusable audio player component within the project,
+                including real-time audio visualization feature using <span class="text-highlighter">wavesurfer.js library.</span>
                 Ensured that the audio playback and visualization run smoothly across different devices and browsers.
               </p>
               <img src="<%=require('images/mubicon/1.jpg')%>" alt="" class="js-animation"/>
