@@ -69,7 +69,7 @@ h1 {
 }
 
 .hero-intro h1 {
-  font-size: clamp(2.25rem, 1.35rem + 5vw, 6.25rem);
+  font-size: clamp(3rem, 1.35rem + 5vw, 6.25rem);
 }
 
 h2 {
@@ -87,10 +87,10 @@ p {
 .site-header {
   max-width: var(--max);
   margin: 0 auto;
-  padding: var(--space-md) var(--space-sm) 0;
+  padding: var(--space-md) var(--space-sm) var(--space-md);
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: var(--space-sm);
 }
@@ -98,6 +98,32 @@ p {
 .logo {
   font-weight: 700;
   font-size: 1rem;
+}
+
+.site-header__social {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.site-header__social a {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.site-header__social a:hover {
+  opacity: 1;
+  background: var(--surface);
+}
+
+.site-header__social img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .nav {
@@ -125,16 +151,41 @@ main {
   padding-top: var(--space-md);
 }
 
+@media (max-width: 668px) {
+  .site-header {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .site-header__social {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .bio-facts__inner {
+    align-items: center;
+    width: 100%;
+  }
+}
+
 /* Facts strip */
 
 .bio-facts__inner {
-  max-width: var(--max);
-  margin: 0 auto;
-  padding: var(--space-sm) var(--space-sm);
   display: flex;
-  justify-content: flex-end;
-  gap: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
-  text-align: right;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .bio-facts__inner {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+    text-align: right;
+  }
 }
 
 .bio-facts__item {
@@ -143,7 +194,7 @@ main {
   line-height: 1.4;
   font-weight: 500;
   color: var(--text);
-  text-align: right;
+  text-align: center;
   max-width: min(100%, 36rem);
 }
 
@@ -157,12 +208,24 @@ main {
   gap: var(--space-md);
   align-items: start;
   margin-bottom: var(--space-md);
+  text-align: center;
 }
 
-@media (min-width: 768px) {
+.hero-intro .hero-bio p {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 1024px) {
   .hero-intro {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: var(--space-lg);
+    text-align: left;
+  }
+
+  .hero-intro .hero-bio p {
+    margin-left: 0;
+    margin-right: 0;
   }
 }
 
