@@ -520,7 +520,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: min(60vw, 360px);
+  min-height: min(90vw, 536px);
 }
 
 
@@ -666,7 +666,7 @@ main {
 .seros-plate {
   border-radius: var(--radius-lg);
   padding: clamp(0.875rem, 2.2vw, 1.5rem);
-  min-height: 0;
+  min-height: min(90vw, 536px);
   display: flex;
   align-items: center;
   justify-content: center;
