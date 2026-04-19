@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/styles.css" />
@@ -15,75 +15,110 @@
   <body>
     <header class="site-header">
       <a class="logo" href="../index.html">Vera Kolotiuk</a>
-      <nav class="nav" aria-label="Primary">
-        <a href="../index.html#works">Works</a>
-        <a href="../index.html#about">About</a>
-        <a href="../index.html#contact">Contact</a>
-      </nav>
     </header>
 
-    <main class="page-content section">
+    <main class="page-content section case-study-page">
       <a class="back-link reveal" href="../index.html#works">← All works</a>
       <header class="page-hero reveal">
         <h1>AI Smart Gallery</h1>
         <p class="detail-meta">Web · Listing quality · AI-assisted UX</p>
       </header>
 
-      <div class="reveal">
-        <div class="gallery-showcase">
-          <div class="gallery-plate gallery-plate--public">
-            <img
-              src="../assets/images/gallery/demo_1.png"
-              alt="Public listing gallery view"
-              width="1200"
-              height="1600"
-              loading="eager"
-            />
+      <article class="case-study reveal">
+        <section class="case-study__section" aria-labelledby="case-situation">
+          <h2 id="case-situation" class="case-study__heading">Context</h2>
+          <div class="case-study__text">
+            <p>
+              Listings with weak or inconsistent photos underperform, yet manually curating large galleries is slow and
+              subjective. The product explored AI-assisted selection and enhancement to lift quality without adding heavy
+              cognitive load for hosts.
+            </p>
+            <p>
+              The interface had to serve two mindsets: visitors who skim a calm public gallery, and hosts who need a
+              structured editor for categories, cover photos, and review of AI-generated layouts.
+            </p>
           </div>
-          <div class="gallery-plate gallery-plate--editor">
-            <img
-              src="../assets/images/gallery/demo_2.png"
-              alt="Photo gallery editor with AI controls"
-              width="1200"
-              height="1600"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </div>
+        </section>
 
-      <div class="detail-body reveal">
-        <p>
-          Improving listing quality using AI-assisted image selection and enhancement. The work
-          paired a calm public-facing gallery with a structured editor for categories, cover photos,
-          and review of AI-generated layouts.
-        </p>
-      </div>
+        <div class="case-study__media media-frame reveal">
+          <div class="case-study__media-placeholder" role="img" aria-label="Placeholder: public gallery"></div>
+        </div>
+
+        <section class="case-study__section" aria-labelledby="case-task">
+          <h2 id="case-task" class="case-study__heading">Goals</h2>
+          <div class="case-study__text">
+            <p>The work aimed to:</p>
+            <ul class="case-study__list">
+              <li>improve perceived listing quality through smarter defaults</li>
+              <li>pair a restrained gallery experience with a powerful editor</li>
+              <li>make AI suggestions reviewable and reversible, not “black box”</li>
+            </ul>
+            <p>
+              The challenge was to surface automation without eroding trust — hosts still needed to feel in control of
+              what guests see.
+            </p>
+          </div>
+        </section>
+
+        <div class="case-study__media media-frame reveal">
+          <div class="case-study__media-placeholder" role="img" aria-label="Placeholder: editor and AI controls"></div>
+        </div>
+
+        <section class="case-study__section" aria-labelledby="case-action">
+          <h2 id="case-action" class="case-study__heading">Approach</h2>
+          <div class="case-study__text">
+            <p>
+              I separated public-facing presentation from editing workflows, then connected them with explicit states for
+              “draft”, “AI suggested”, and “published” so users always knew what was live.
+            </p>
+            <p>The core principle for the experience:</p>
+            <blockquote class="case-study__pullquote">
+              <p>AI should propose; the host should decide — in one calm surface, not a maze of modals.</p>
+            </blockquote>
+            <p>Explorations focused on:</p>
+            <ul class="case-study__list">
+              <li>category and cover-photo rules that stay visible while scrolling long galleries</li>
+              <li>batch review patterns for AI layouts before they ship</li>
+              <li>microcopy that explains what changed and why</li>
+            </ul>
+            <p>
+              Visual language stayed quiet so photography stayed hero; controls recede until you need them.
+            </p>
+
+            <div class="case-study__plate case-study__plate--duo reveal">
+              <div class="case-study__media-placeholder" aria-hidden="true"></div>
+              <div class="case-study__media-placeholder" aria-hidden="true"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="case-study__section" aria-labelledby="case-result">
+          <h2 id="case-result" class="case-study__heading">Outcomes</h2>
+          <div class="case-study__text">
+            <p>
+              The result pairs a calm public-facing gallery with a structured editor for categories, cover photos, and
+              review of AI-generated layouts — improving listing quality while keeping hosts in control.
+            </p>
+            <p>
+              The system also established patterns that could extend to video and 3D tours later without breaking the
+              mental model.
+            </p>
+          </div>
+        </section>
+      </article>
     </main>
 
-    <footer class="site-footer reveal">
-      <a href="mailto:hello@example.com" aria-label="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true">
-          <path d="M4 6h16v12H4V6z" />
-          <path d="M4 7l8 6 8-6" />
-        </svg>
+    <footer id="contact" class="site-footer reveal">
+      <a href="mailto:vmorozova77@gmail.com" aria-label="Email">
+        <img src="../assets/images/branding/gmail.png" alt="" width="22" height="22" loading="lazy" />
       </a>
-      <a href="https://github.com/" rel="noopener noreferrer" aria-label="GitHub">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path
-            d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.272.098-2.65 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.379.203 2.398.1 2.651.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
-          />
-        </svg>
+      <a href="https://github.com/VeraKolotyuk" rel="noopener noreferrer" aria-label="GitHub">
+        <img src="../assets/images/branding/github.png" alt="" width="22" height="22" loading="lazy" />
       </a>
-      <a href="https://www.linkedin.com/" rel="noopener noreferrer" aria-label="LinkedIn">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path
-            d="M6.5 8.5h-3V21h3V8.5zM5.25 4a1.75 1.75 0 100 3.5 1.75 1.75 0 000-3.5zM21 21h-3v-5.43c0-1.29-.02-2.95-1.8-2.95-1.8 0-2.07 1.41-2.07 2.86V21h-3V8.5h2.89v1.32h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59V21z"
-          />
-        </svg>
+      <a href="https://www.linkedin.com/in/vera-kolotiuk" rel="noopener noreferrer" aria-label="LinkedIn">
+        <img src="../assets/images/branding/in.png" alt="" width="22" height="22" loading="lazy" />
       </a>
     </footer>
-
     <script src="../js/main.js" defer></script>
   </body>
 </html>
